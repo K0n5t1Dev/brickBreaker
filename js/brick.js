@@ -1,4 +1,4 @@
-import { detectCollision } from "/js/collisionDetection.js";
+import { ballCollision } from "/js/collisionDetection.js";
 
 export default class Brick {
     constructor(game, position) {
@@ -17,11 +17,34 @@ export default class Brick {
     }
 
     update() {
-        if(detectCollision(this.game.ball, this)) {
-            this.game.ball.speed.y = -this.game.ball.speed.y;
-            this.lives--;
-            if(this.lives == 0) this.markedForDestroy = true;
+        let collision = ballCollision(this.game.ball, this);
+        switch (collision) {
+            //left
+            case 1:
+                this.game.ball.speed.x = -this.game.ball.speed.x;
+                this.lives--;
+                break;
+
+            //right
+            case 2:
+                this.game.ball.speed.x = -this.game.ball.speed.x;
+                this.lives--;
+                break;
+            
+            //top
+            case 3:
+                this.game.ball.speed.y = -this.game.ball.speed.y;
+                this.lives--;
+                break;
+
+            //bottom    
+            case 4:
+                this.game.ball.speed.y = -this.game.ball.speed.y;
+                this.lives--;
+                break;
         }
+
+        if(this.lives == 0) this.markedForDestroy = true;
     }
 
     draw(ctx) {

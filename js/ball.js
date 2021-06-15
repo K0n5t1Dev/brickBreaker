@@ -1,4 +1,4 @@
-import { detectCollision } from "/js/collisionDetection.js";
+import { ballCollision } from "/js/collisionDetection.js";
 
 export default class Ball {
     constructor(game) {
@@ -43,14 +43,27 @@ export default class Ball {
         }
 
         //collision with paddle
-        if(detectCollision(this, this.game.paddle)) {
-            this.speed.y = -this.speed.y;
-            this.position.y = this.game.paddle.position.y - this.size;
+        let collision = ballCollision(this.game.ball, this.game.paddle);
+        switch (collision) {
+            //left
+            case 1:
+                this.game.ball.speed.x = -this.game.ball.speed.x;
+                break;
+
+            //right
+            case 2:
+                this.game.ball.speed.x = -this.game.ball.speed.x;
+                break;
+            
+            //top
+            case 3:
+                this.game.ball.speed.y = -this.game.ball.speed.y;
+                break;
+
+            //bottom    
+            case 4:
+                this.game.ball.speed.y = -this.game.ball.speed.y;
+                break;
         }
     }
 }
-
-setInterval(event => {
-    this.speed.x += .2;
-    this.speed.y += .2;
-}, 1000);
