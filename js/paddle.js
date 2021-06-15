@@ -4,8 +4,8 @@ export default class Paddle {
         this.image = document.getElementById("image_paddle");
         this.gameWidth = game.gameWidth;
         this.gameHeight = game.gameHeight;
-        this.width = 120;
-        this.height = 20;
+        this.width = this.gameWidth / 12;
+        this.height = this.width / 6;
 
         this.maxSpeed = 7;
         this.speed = 0;

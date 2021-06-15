@@ -8,7 +8,7 @@ export default class Ball {
         this.gameWidth = game.gameWidth;
         this.gameHeight = game.gameHeight;
 
-        this.size = 18;
+        this.size = game.paddle.width / 9;
         this.reset();
     }
 
